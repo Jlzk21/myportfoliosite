@@ -3,7 +3,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
-import Recaptcha from "react-native-recaptcha-that-works";
 
 export const Contact = () => {
   
@@ -59,23 +58,7 @@ export const Contact = () => {
     setFormDetails(formInitialDetails);
   };
 
-  const recaptcha = useRef();
-
-  const send = () => {
-    this.recaptcha.current.open();
-  };
-
-  const onVerify = (token) => {
-    handleSubmit
-  };
-
-  const onExpire = () => {
-    setStatus({
-      succes: false,
-      message: "Something went wrong, please try again later." + error,
-    })
-  };
-
+  
   return (
     <section className="contact" id="connect">
       <Container>
@@ -102,7 +85,7 @@ export const Contact = () => {
                   }
                 >
                   <h2>Get In Touch</h2>
-                  <form data-netlify-recaptcha="true" onSubmit={send}>
+                  <form data-netlify-recaptcha="true" onSubmit={handleSubmit}>
                     <Row>
                       <Col size={12} sm={6} className="px-1">
                         <input
@@ -158,14 +141,7 @@ export const Contact = () => {
                         ></textarea>
 
                         <div data-netlify-recaptcha="true"></div>
-                        <Recaptcha
-                          ref={recaptcha}
-                          siteKey="6Ld11dwiAAAAAJ_qOYqfvdvfI7DQ-5tePgE1vs36"
-                          baseUrl="http://jlzkdev.netlify.app"
-                          onVerify={onVerify}
-                          onExpire={onExpire}
-                          size="invisible"
-                        />
+                        
                         <button type="submit">
                           <span>{buttonText}</span>
                         </button>
