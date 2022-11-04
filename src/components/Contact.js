@@ -14,37 +14,16 @@ export const Contact = () => {
   };
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Send");
-  const [status, setStatus] = useState({});
+  //const [status, setStatus] = useState({});
 
-  const onFormUpdate = (category, value) => {
-    setFormDetails({
-      ...formDetails,
-      [category]: value,
-    });
-  };
+  // const onFormUpdate = (category, value) => {
+  //   setFormDetails({
+  //     ...formDetails,
+  //     [category]: value,
+  //   });
+  // };
 
-  const handleSubmit2 = async (e) => {
-    e.preventDefault();
-    setButtonText("Sending...");
-    let response = await fetch("/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(formDetails),
-    });
-    setButtonText("Send");
-    let result = await response.json();
-    setFormDetails(formInitialDetails);
-    if (result.code == 200) {
-      setStatus({ succes: true, message: "Message sent successfully" });
-    } else {
-      setStatus({
-        succes: false,
-        message: "Something went wrong, please try again later.",
-      });
-    }
-  };
+  handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
   function encode(data) {
     return Object.keys(data)
@@ -112,9 +91,7 @@ export const Contact = () => {
                           name="firstname"
                           value={formDetails.firstName}
                           placeholder="First Name"
-                          onChange={(e) =>
-                            onFormUpdate("firstName", e.target.value)
-                          }
+                          onChange={this.handleChange}
                         />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
@@ -123,9 +100,7 @@ export const Contact = () => {
                           name="lastname"
                           value={formDetails.lastName}
                           placeholder="Last Name"
-                          onChange={(e) =>
-                            onFormUpdate("lastName", e.target.value)
-                          }
+                          onChange={this.handleChange}
                         />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
@@ -134,9 +109,7 @@ export const Contact = () => {
                           name="email"
                           value={formDetails.email}
                           placeholder="Email Address"
-                          onChange={(e) =>
-                            onFormUpdate("email", e.target.value)
-                          }
+                          onChange={this.handleChange}
                         />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
@@ -145,9 +118,7 @@ export const Contact = () => {
                           name="tel"
                           value={formDetails.phone}
                           placeholder="Phone No."
-                          onChange={(e) =>
-                            onFormUpdate("phone", e.target.value)
-                          }
+                          onChange={this.handleChange}
                         />
                       </Col>
                       <Col size={12} className="px-1">
@@ -156,9 +127,7 @@ export const Contact = () => {
                           name="message"
                           value={formDetails.message}
                           placeholder="Message"
-                          onChange={(e) =>
-                            onFormUpdate("message", e.target.value)
-                          }
+                          onChange={this.handleChange}
                         ></textarea>
                         <button type="submit">
                           <span>{buttonText}</span>
