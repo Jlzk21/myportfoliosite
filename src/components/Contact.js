@@ -3,7 +3,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
-import { NetlifyForm, Honeypot } from 'react-netlify-forms'
 
 export const Contact = () => {
   const formInitialDetails = {
@@ -61,8 +60,7 @@ export const Contact = () => {
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <h2>Get In Touch</h2>
-                <NetlifyForm name='Contact' action='/thanks' honeypotName='bot-field' onSubmit={handleSubmit} method="post">
-                
+                <form onSubmit={handleSubmit} method="post" data-netlify-recaptcha="true" data-netlify="true">
                   <Row>
                     <Col size={12} sm={6} className="px-1">
                       <input type="text" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName', e.target.value)} />
@@ -87,8 +85,7 @@ export const Contact = () => {
                       </Col>
                     }
                   </Row>
-              
-                </NetlifyForm>
+                </form>
               </div>}
             </TrackVisibility>
           </Col>
