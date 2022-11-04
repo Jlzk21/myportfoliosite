@@ -3,8 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
+import Recaptcha from "react-native-recaptcha-that-works";
 
 export const Contact = () => {
+  
   const formInitialDetails = {
     firstname: "",
     lastname: "",
@@ -12,6 +14,7 @@ export const Contact = () => {
     tel: "",
     message: "",
   };
+
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Send");
   const [status, setStatus] = useState({});
@@ -26,12 +29,11 @@ export const Contact = () => {
   function encode(data) {
     return Object.keys(data)
       .map(
-        (key) =>
-          encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
       )
       .join("&");
   }
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setButtonText("Sending...");
@@ -43,11 +45,35 @@ export const Contact = () => {
         ...formDetails,
       }),
     })
-      .then(() => setStatus({ succes: true, message: 'Message sent successfully'}))
-      .catch((error) => setStatus({ succes: false, message: 'Something went wrong, please try again later.' + error}));
+      .then(() =>
+        setStatus({ succes: true, message: "Message sent successfully" })
+      )
+      .catch((error) =>
+        setStatus({
+          succes: false,
+          message: "Something went wrong, please try again later." + error,
+        })
+      );
 
     setButtonText("Send");
     setFormDetails(formInitialDetails);
+  };
+
+  const recaptcha = useRef();
+
+  const send = () => {
+    this.recaptcha.current.open();
+  };
+
+  const onVerify = (token) => {
+    handleSubmit
+  };
+
+  const onExpire = () => {
+    setStatus({
+      succes: false,
+      message: "Something went wrong, please try again later." + error,
+    })
   };
 
   return (
@@ -76,11 +102,7 @@ export const Contact = () => {
                   }
                 >
                   <h2>Get In Touch</h2>
-                  <form
-                    data-netlify-recaptcha="true"
-                    onSubmit={handleSubmit}
-                  >
-                  
+                  <form data-netlify-recaptcha="true" onSubmit={send}>
                     <Row>
                       <Col size={12} sm={6} className="px-1">
                         <input
@@ -121,9 +143,7 @@ export const Contact = () => {
                           name="tel"
                           value={formDetails.tel}
                           placeholder="Phone No."
-                          onChange={(e) =>
-                            onFormUpdate("tel", e.target.value)
-                          }
+                          onChange={(e) => onFormUpdate("tel", e.target.value)}
                         />
                       </Col>
                       <Col size={12} className="px-1">
@@ -136,8 +156,16 @@ export const Contact = () => {
                             onFormUpdate("message", e.target.value)
                           }
                         ></textarea>
-                   
+
                         <div data-netlify-recaptcha="true"></div>
+                        <Recaptcha
+                          ref={recaptcha}
+                          siteKey="6Ld11dwiAAAAAJ_qOYqfvdvfI7DQ-5tePgE1vs36"
+                          baseUrl="http://jlzkdev.netlify.app"
+                          onVerify={onVerify}
+                          onExpire={onExpire}
+                          size="invisible"
+                        />
                         <button type="submit">
                           <span>{buttonText}</span>
                         </button>
@@ -145,6 +173,7 @@ export const Contact = () => {
                       {status.message && (
                         <Col size={12} className="px-1">
                           <p
+                            rows="6"
                             className={
                               status.success === false ? "danger" : "success"
                             }
