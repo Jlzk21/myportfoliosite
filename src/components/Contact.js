@@ -61,11 +61,11 @@ export const Contact = () => {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
-        "form-name": event.target.getAttribute("name"),
+        "form-name": "contact",
         ...formInitialDetails,
       }),
     })
-      .then(() => navigate("/thank-you/"))
+      .then(() => alert("Success!"))
       .catch((error) => alert(error));
   };
 
