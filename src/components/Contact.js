@@ -73,12 +73,14 @@ export const Contact = () => {
                 >
                   <h2>Get In Touch</h2>
                   <form
-                    onSubmit={handleSubmit}
+                    name="contact"
                     method="post"
-                    data-netlify-recaptcha="true"
+                    onSubmit={handleSubmit}
                     data-netlify="true"
+                    data-netlify-honeypot="bot-field"
                   >
                     <input type="hidden" name="form-name" value="contact" />
+
                     <Row>
                       <Col size={12} sm={6} className="px-1">
                         <input
