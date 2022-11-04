@@ -40,7 +40,7 @@ export const Contact = () => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": "contact",
-        formDetails,
+        ...formDetails,
       }),
     })
       .then(() => alert("Success!"))
@@ -77,12 +77,9 @@ export const Contact = () => {
                 >
                   <h2>Get In Touch</h2>
                   <form
-                    name="contact"
-                    method="post"
                     onSubmit={handleSubmit}
                   >
-                    <input type="hidden" name="form-name" value="contact" />
-
+                  
                     <Row>
                       <Col size={12} sm={6} className="px-1">
                         <input
