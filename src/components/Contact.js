@@ -77,6 +77,7 @@ export const Contact = () => {
                 >
                   <h2>Get In Touch</h2>
                   <form
+                    data-netlify-recaptcha="true"
                     onSubmit={handleSubmit}
                   >
                   
@@ -135,6 +136,8 @@ export const Contact = () => {
                             onFormUpdate("message", e.target.value)
                           }
                         ></textarea>
+                   
+                        <div data-netlify-recaptcha="true"></div>
                         <button type="submit">
                           <span>{buttonText}</span>
                         </button>
