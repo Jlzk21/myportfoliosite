@@ -34,7 +34,7 @@ export const NavBar = () => {
         <Container>
           <Navbar.Brand href="/">
             <span class="logo">
-              JLZKHELLO <span className="sublogo">DEV</span>
+              JLZK <span className="sublogo">DEV</span>
             </span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
