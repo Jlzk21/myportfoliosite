@@ -143,7 +143,7 @@ export const Contact = () => {
                         </button>
                       </Col>
                       {status.message && (
-                        <Col>
+                        <Col size={12} className="px-1">
                           <p
                             className={
                               status.success === false ? "danger" : "success"
