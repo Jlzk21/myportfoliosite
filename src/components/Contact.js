@@ -85,6 +85,7 @@ export const Contact = () => {
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="text"
+                          name="name"
                           value={formDetails.firstName}
                           placeholder="First Name"
                           onChange={(e) =>
@@ -105,6 +106,7 @@ export const Contact = () => {
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="email"
+                          name="email"
                           value={formDetails.email}
                           placeholder="Email Address"
                           onChange={(e) =>
