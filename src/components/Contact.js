@@ -43,8 +43,8 @@ export const Contact = () => {
         ...formDetails,
       }),
     })
-      .then(() => alert("Success!"))
-      .catch((error) => alert(error));
+      .then(() => setStatus({ succes: true, message: 'Message sent successfully'}))
+      .catch((error) => setStatus({ succes: false, message: 'Something went wrong, please try again later.' + error}));
 
     setButtonText("Send");
     setFormDetails(formInitialDetails);
