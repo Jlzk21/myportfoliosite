@@ -6,10 +6,10 @@ import TrackVisibility from "react-on-screen";
 
 export const Contact = () => {
   const formInitialDetails = {
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
-    phone: "",
+    tel: "",
     message: "",
   };
   const [formDetails, setFormDetails] = useState(formInitialDetails);
@@ -85,10 +85,10 @@ export const Contact = () => {
                         <input
                           type="text"
                           name="firstname"
-                          value={formDetails.firstName}
+                          value={formDetails.firstname}
                           placeholder="First Name"
                           onChange={(e) =>
-                            onFormUpdate("firstName", e.target.value)
+                            onFormUpdate("firstname", e.target.value)
                           }
                         />
                       </Col>
@@ -96,10 +96,10 @@ export const Contact = () => {
                         <input
                           type="text"
                           name="lastname"
-                          value={formDetails.lastName}
+                          value={formDetails.lastname}
                           placeholder="Last Name"
                           onChange={(e) =>
-                            onFormUpdate("lastName", e.target.value)
+                            onFormUpdate("lastname", e.target.value)
                           }
                         />
                       </Col>
@@ -118,10 +118,10 @@ export const Contact = () => {
                         <input
                           type="tel"
                           name="tel"
-                          value={formDetails.phone}
+                          value={formDetails.tel}
                           placeholder="Phone No."
                           onChange={(e) =>
-                            onFormUpdate("phone", e.target.value)
+                            onFormUpdate("tel", e.target.value)
                           }
                         />
                       </Col>
