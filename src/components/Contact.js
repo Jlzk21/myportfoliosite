@@ -76,8 +76,6 @@ export const Contact = () => {
                     name="contact"
                     method="post"
                     onSubmit={handleSubmit}
-                    data-netlify="true"
-                    data-netlify-honeypot="bot-field"
                   >
                     <input type="hidden" name="form-name" value="contact" />
 
@@ -85,7 +83,7 @@ export const Contact = () => {
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="text"
-                          name="name"
+                          name="firstname"
                           value={formDetails.firstName}
                           placeholder="First Name"
                           onChange={(e) =>
@@ -96,6 +94,7 @@ export const Contact = () => {
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="text"
+                          name="lastname"
                           value={formDetails.lasttName}
                           placeholder="Last Name"
                           onChange={(e) =>
@@ -117,6 +116,7 @@ export const Contact = () => {
                       <Col size={12} sm={6} className="px-1">
                         <input
                           type="tel"
+                          name="tel"
                           value={formDetails.phone}
                           placeholder="Phone No."
                           onChange={(e) =>
@@ -127,6 +127,7 @@ export const Contact = () => {
                       <Col size={12} className="px-1">
                         <textarea
                           rows="6"
+                          name="message"
                           value={formDetails.message}
                           placeholder="Message"
                           onChange={(e) =>
