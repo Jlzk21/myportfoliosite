@@ -1,11 +1,12 @@
+import "animate.css";
 import { useState } from "react";
 import React, { useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
-import "animate.css";
 import TrackVisibility from "react-on-screen";
 import RECAPTCHA from "react-google-recaptcha";
-const axios = require('axios');
+
+const axios = require("axios");
 
 export const Contact = () => {
   const formInitialDetails = {
@@ -42,14 +43,19 @@ export const Contact = () => {
     const token = captchaRef.current.getValue();
     captchaRef.current.reset();
 
+    setButtonText("Sending...");
+
     await axios
       .post(process.env.REACT_APP_API_URL, { token })
-      .then((res) => console.log(res))
+      .then((res) => setStatus({ succes: true, message: {res} }))
       .catch((error) => {
-        console.log(error);
+        setStatus({
+          succes: false,
+          message: "Something went wrong, please try again later." + error,
+        });
       });
-      
-    setButtonText("Sending...");
+
+    
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -160,12 +166,7 @@ export const Contact = () => {
                           ref={captchaRef}
                         />
 
-                        <button
-                          type="submit"
-                          onPress={() => {
-                            this.captchaForm.show();
-                          }}
-                        >
+                        <button type="submit">
                           <span>{buttonText}</span>
                         </button>
                       </Col>
