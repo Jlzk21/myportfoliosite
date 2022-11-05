@@ -5,6 +5,7 @@ import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import RECAPTCHA from "react-google-recaptcha";
+const axios = require('axios');
 
 export const Contact = () => {
   const formInitialDetails = {
