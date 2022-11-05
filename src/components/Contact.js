@@ -1,14 +1,13 @@
 import { useState } from "react";
+import React, { useRef } from 'react';
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
-import ConfirmGoogleCaptcha from "react-native-google-recaptcha-v2";
-
-const siteKey = "6LeVYd4iAAAAAN4tNhV_RTVfEO8XJpc0k-D7b9JH";
-const baseUrl = "https://google.com";
+import reCAPTCHA from "react-google-recaptcha";
 
 export const Contact = () => {
+
   const formInitialDetails = {
     firstname: "",
     lastname: "",
@@ -16,6 +15,8 @@ export const Contact = () => {
     tel: "",
     message: "",
   };
+
+  const captchaRef = useRef(null)
 
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Send");
@@ -59,26 +60,6 @@ export const Contact = () => {
 
     setButtonText("Send");
     setFormDetails(formInitialDetails);
-  };
-
-  state = {
-    code: null,
-  };
-  
-  onMessage = event => {
-    if (event && event.nativeEvent.data) {
-      if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
-        this.captchaForm.hide();
-        return;
-      } else {
-        console.log('Verified code from Google', event.nativeEvent.data);
-        this.setState({ code: event.nativeEvent.data });
-        setTimeout(() => {
-          this.captchaForm.hide();
-          // do what ever you want here
-        }, 1500);
-      }
-    }
   };
 
   return (
@@ -164,12 +145,9 @@ export const Contact = () => {
 
                         <div data-netlify-recaptcha="true"></div>
 
-                        <ConfirmGoogleCaptcha
-                          ref={(_ref) => (this.captchaForm = _ref)}
-                          siteKey={siteKey}
-                          baseUrl={baseUrl}
-                          languageCode="vi"
-                          onMessage={this.onMessage}
+                        <reCAPTCHA
+                          sitekey={"6LeVYd4iAAAAAN4tNhV_RTVfEO8XJpc0k-D7b9JH"}
+                          ref={captchaRef}
                         />
 
                         <button
