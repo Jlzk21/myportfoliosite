@@ -1,5 +1,5 @@
 import { useState } from "react";
-//import React, { useRef } from "react";
+import React, { useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
@@ -36,11 +36,18 @@ export const Contact = () => {
       .join("&");
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const token = captchaRef.current.getValue();
     captchaRef.current.reset();
 
+    await axios
+      .post(process.env.REACT_APP_API_URL, { token })
+      .then((res) => console.log(res))
+      .catch((error) => {
+        console.log(error);
+      });
+      
     setButtonText("Sending...");
     fetch("/", {
       method: "POST",
@@ -148,8 +155,8 @@ export const Contact = () => {
                         <div data-netlify-recaptcha="true"></div>
 
                         <RECAPTCHA
-                          sitekey={"6LeVYd4iAAAAAN4tNhV_RTVfEO8XJpc0k-D7b9JH"}
-                          //ref={captchaRef}
+                          sitekey={process.env.REACT_APP_SITE_KEY}
+                          ref={captchaRef}
                         />
 
                         <button
