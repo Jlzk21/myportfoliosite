@@ -24,7 +24,7 @@ const contactEmail = nodemailer.createTransport({
   },
 });
 
-//POST route
+
 router.post("/post", async (req, res) => {
   //Destructuring response token from request body
   const { token } = req.body;
