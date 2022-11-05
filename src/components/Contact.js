@@ -45,17 +45,6 @@ export const Contact = () => {
 
     setButtonText("Sending...");
 
-    await axios
-      .post(process.env.REACT_APP_API_URL, { token })
-      .then((res) => setStatus({ succes: true, message: {res} }))
-      .catch((error) => {
-        setStatus({
-          succes: false,
-          message: "Something went wrong, please try again later." + error,
-        });
-      });
-
-    
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
