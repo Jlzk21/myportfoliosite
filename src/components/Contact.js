@@ -3,10 +3,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
+import ConfirmGoogleCaptcha from "react-native-google-recaptcha-v2";
 
+const siteKey = "6LeVYd4iAAAAAN4tNhV_RTVfEO8XJpc0k-D7b9JH";
+const baseUrl = "https://google.com";
 
 export const Contact = () => {
-  
   const formInitialDetails = {
     firstname: "",
     lastname: "",
@@ -59,8 +61,26 @@ export const Contact = () => {
     setFormDetails(formInitialDetails);
   };
 
+  state = {
+    code: null,
+  };
   
-  
+  onMessage = event => {
+    if (event && event.nativeEvent.data) {
+      if (['cancel', 'error', 'expired'].includes(event.nativeEvent.data)) {
+        this.captchaForm.hide();
+        return;
+      } else {
+        console.log('Verified code from Google', event.nativeEvent.data);
+        this.setState({ code: event.nativeEvent.data });
+        setTimeout(() => {
+          this.captchaForm.hide();
+          // do what ever you want here
+        }, 1500);
+      }
+    }
+  };
+
   return (
     <section className="contact" id="connect">
       <Container>
@@ -143,8 +163,21 @@ export const Contact = () => {
                         ></textarea>
 
                         <div data-netlify-recaptcha="true"></div>
-                        
-                        <button type="submit">
+
+                        <ConfirmGoogleCaptcha
+                          ref={(_ref) => (this.captchaForm = _ref)}
+                          siteKey={siteKey}
+                          baseUrl={baseUrl}
+                          languageCode="vi"
+                          onMessage={this.onMessage}
+                        />
+
+                        <button
+                          type="submit"
+                          onPress={() => {
+                            this.captchaForm.show();
+                          }}
+                        >
                           <span>{buttonText}</span>
                         </button>
                       </Col>
