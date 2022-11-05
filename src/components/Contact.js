@@ -4,6 +4,7 @@ import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 
+
 export const Contact = () => {
   
   const formInitialDetails = {
@@ -58,6 +59,7 @@ export const Contact = () => {
     setFormDetails(formInitialDetails);
   };
 
+  
   
   return (
     <section className="contact" id="connect">
