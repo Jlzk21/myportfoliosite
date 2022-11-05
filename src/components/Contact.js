@@ -1,13 +1,12 @@
 import { useState } from "react";
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
-import reCAPTCHA from "react-google-recaptcha";
+import RECAPTCHA from "react-google-recaptcha";
 
 export const Contact = () => {
-
   const formInitialDetails = {
     firstname: "",
     lastname: "",
@@ -16,7 +15,7 @@ export const Contact = () => {
     message: "",
   };
 
-  const captchaRef = useRef(null)
+  const captchaRef = useRef(null);
 
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Send");
@@ -39,6 +38,9 @@ export const Contact = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const token = captchaRef.current.getValue();
+    captchaRef.current.reset();
+
     setButtonText("Sending...");
     fetch("/", {
       method: "POST",
@@ -145,7 +147,7 @@ export const Contact = () => {
 
                         <div data-netlify-recaptcha="true"></div>
 
-                        <reCAPTCHA
+                        <RECAPTCHA
                           sitekey={"6LeVYd4iAAAAAN4tNhV_RTVfEO8XJpc0k-D7b9JH"}
                           ref={captchaRef}
                         />
