@@ -1,5 +1,5 @@
 import { useState } from "react";
-import React, { useRef } from "react";
+//import React, { useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
@@ -149,7 +149,7 @@ export const Contact = () => {
 
                         <RECAPTCHA
                           sitekey={"6LeVYd4iAAAAAN4tNhV_RTVfEO8XJpc0k-D7b9JH"}
-                          ref={captchaRef}
+                          //ref={captchaRef}
                         />
 
                         <button
